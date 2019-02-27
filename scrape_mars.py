@@ -7,22 +7,22 @@ import requests
 # Initialize browser
 def init_browser(): 
     
-    exec_path = {'executable_path': '/app/.chromedriver/bin/chromedriver'}
-    return Browser('chrome', headless=True, **exec_path)
+    exec_path = {'executable_path': 'chromedriver.exe'}
+    browser = Browser('chrome', **exec_path, headless=False)
+    return browser
 
+    
 # Create Mission to Mars global dictionary that can be imported into Mongo
 mars_info = {}
 
 # NASA MARS NEWS
 def scrape_mars_news():
+    
+    browser = init_browser()
+    
     try: 
 
-        # Initialize browser 
-        browser = init_browser()
-
-        #browser.is_element_present_by_css("div.content_title", wait_time=1)
-
-        # Visit Nasa news url through splinter module
+        
         url = 'https://mars.nasa.gov/news/'
         browser.visit(url)
 
@@ -49,11 +49,13 @@ def scrape_mars_news():
 
 # FEATURED IMAGE
 def scrape_mars_image():
-
+    
+    browser = init_browser()
+    
     try: 
 
         # Initialize browser 
-        browser = init_browser()
+        
 
         
         image_url_featured = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
@@ -89,11 +91,12 @@ def scrape_mars_image():
 
 # Mars Weather 
 def scrape_mars_weather():
-
+    browser = init_browser()
+    
     try: 
 
         # Initialize browser 
-        browser = init_browser()
+        
 
         #browser.is_element_present_by_css("div", wait_time=1)
 
@@ -160,11 +163,11 @@ def scrape_mars_facts():
 
 
 def scrape_mars_hemispheres():
-
+    browser = init_browser()
     try: 
 
         # Initialize browser 
-        browser = init_browser()
+        
 
         # Visit hemispheres website through splinter module 
         hemispheres_url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
